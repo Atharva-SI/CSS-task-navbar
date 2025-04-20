@@ -92,14 +92,16 @@
 
     <!-- Mobile Menu Overlay -->
     <div class="mobile-menu" id="mobileMenu">
-
       <div class="mobile-header">
         <span class="close-btn" id="closeMenu">&times;</span>
       </div>
+
       <div class="main-content-mobile">
-        <ul class=".mobile-menu">
-     
+        <!-- Scrollable menu content -->
+        <div class="menu-wrapper">
+          <ul class="mobile-menu-list">
             <li><a href="#" class="active">Home</a></li>
+
             <li class="dropdown-mobile">
               <a href="#"
                 >Latest Updates <i class="fa-solid fa-chevron-down"></i
@@ -110,16 +112,19 @@
                 <li><a href="#">Press Release</a></li>
               </ul>
             </li>
+
             <li class="dropdown-mobile">
-              <a class="icon-space" href="#">Squads <i class="fa-solid fa-chevron-down"></i></a>
+              <a class="icon-space" href="#"
+                >Squads <i class="fa-solid fa-chevron-down"></i
+              ></a>
               <ul class="dropdown-content-mobile">
                 <li><a href="#">Team A</a></li>
                 <li><a href="#">Team B</a></li>
               </ul>
             </li>
-            <li class="dropdown-mobile">
-              <a href="#">Fixtures</a>
-            </li>
+
+            <li><a href="#">Fixtures</a></li>
+
             <li class="dropdown-mobile">
               <a href="#">Gallery <i class="fa-solid fa-chevron-down"></i></a>
               <ul class="dropdown-content-mobile">
@@ -127,105 +132,122 @@
                 <li><a href="#">Videos</a></li>
               </ul>
             </li>
+
             <li><a href="#">Hall of Fame</a></li>
             <li><a href="#">About Us</a></li>
-            
           </ul>
-          <div class="social-icons-mobile">
-            <p>Follow us on</p>
-            <div>
-              <i class="fab fa-facebook"></i>
-              <i class="fab fa-instagram"></i>
-              <i class="fab fa-x-twitter"></i>
-              <i class="fab fa-youtube"></i>
-              <i class="fas fa-external-link-alt"></i>
-              <i class="fas fa-fist-raised"></i>
-            </div>
+        </div>
+
+        <!-- Sticky social icons at bottom -->
+        <div class="social-icons-mobile">
+          <p>Follow us on</p>
+          <div>
+            <i class="fab fa-facebook"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-x-twitter"></i>
+            <i class="fab fa-youtube"></i>
+            <i class="fas fa-external-link-alt"></i>
+            <i class="fas fa-fist-raised"></i>
           </div>
+        </div>
       </div>
-      
     </div>
 
     <script>
+      // ===== Desktop Nav Active Link =====
       const navLinks = document.querySelectorAll(".nav-links a");
 
       navLinks.forEach((link) => {
         link.addEventListener("click", function () {
-          // Remove 'active' from all links
           navLinks.forEach((l) => l.classList.remove("active"));
-
-          // Add 'active' to the clicked one
           this.classList.add("active");
         });
       });
 
-      //   for mobile
-      const menulinks = document.querySelectorAll(".mobile-menu a");
+      // ===== Mobile Nav Active Link =====
+      const menulinks = document.querySelectorAll(".mobile-menu-list a");
+
       menulinks.forEach((link) => {
         link.addEventListener("click", function () {
-          // Remove 'active' from all links
           menulinks.forEach((l) => l.classList.remove("active"));
-
-          // Add 'active' to the clicked one
           this.classList.add("active");
         });
       });
 
+      // ===== Desktop Dropdowns =====
       const dropdowns = document.querySelectorAll(".dropdown");
 
-dropdowns.forEach((dropdown) => {
-  dropdown.addEventListener("click", function (e) {
-    e.stopPropagation();
+      dropdowns.forEach((dropdown) => {
+        dropdown.addEventListener("click", function (e) {
+          e.stopPropagation();
 
-    // Close other dropdowns and reset their chevrons
-    document.querySelectorAll(".dropdown").forEach((otherDropdown) => {
-      if (otherDropdown !== this) {
-        otherDropdown.querySelector(".dropdown-content")?.classList.remove("show");
-        otherDropdown.querySelector(".fa-chevron-down")?.classList.remove("rotate");
-      }
-    });
+          dropdowns.forEach((otherDropdown) => {
+            if (otherDropdown !== this) {
+              otherDropdown
+                .querySelector(".dropdown-content")
+                ?.classList.remove("show");
+              otherDropdown
+                .querySelector(".fa-chevron-down")
+                ?.classList.remove("rotate");
+            }
+          });
 
-    // Toggle current dropdown
-    const content = this.querySelector(".dropdown-content");
-    const icon = this.querySelector(".fa-chevron-down");
+          const content = this.querySelector(".dropdown-content");
+          const icon = this.querySelector(".fa-chevron-down");
 
-    content.classList.toggle("show");
-    icon.classList.toggle("rotate");
-  });
-});
+          content.classList.toggle("show");
+          icon.classList.toggle("rotate");
+        });
+      });
 
-// mobile
-const dropdownsMobile = document.querySelectorAll(".dropdown-mobile");
+      // ===== Mobile Dropdowns =====
+      const dropdownsMobile = document.querySelectorAll(".dropdown-mobile");
 
-dropdownsMobile.forEach((dropdown) => {
-  dropdown.addEventListener("click", function (e) {
-    e.stopPropagation(); // Prevent bubbling
+      dropdownsMobile.forEach((dropdown) => {
+        dropdown.addEventListener("click", function (e) {
+          e.stopPropagation();
 
-    // Close all other dropdowns and reset their icons
-    dropdownsMobile.forEach((otherDropdown) => {
-      if (otherDropdown !== this) {
-        otherDropdown.querySelector(".dropdown-content-mobile")?.classList.remove("show");
-        otherDropdown.querySelector(".fa-chevron-down")?.classList.remove("rotate");
-      }
-    });
+          dropdownsMobile.forEach((otherDropdown) => {
+            if (otherDropdown !== this) {
+              otherDropdown
+                .querySelector(".dropdown-content-mobile")
+                ?.classList.remove("show");
+              otherDropdown
+                .querySelector(".fa-chevron-down")
+                ?.classList.remove("rotate");
+            }
+          });
 
-    // Toggle current dropdown content
-    const content = this.querySelector(".dropdown-content-mobile");
-    const icon = this.querySelector(".fa-chevron-down");
+          const content = this.querySelector(".dropdown-content-mobile");
+          const icon = this.querySelector(".fa-chevron-down");
 
-    content.classList.toggle("show");
-    icon.classList.toggle("rotate");
-  });
-});
+          content.classList.toggle("show");
+          icon.classList.toggle("rotate");
+        });
+      });
 
-// ✅ Close all dropdowns if clicked outside
-document.addEventListener("click", () => {
-  dropdownsMobile.forEach((dropdown) => {
-    dropdown.querySelector(".dropdown-content-mobile")?.classList.remove("show");
-    dropdown.querySelector(".fa-chevron-down")?.classList.remove("rotate");
-  });
-});
+      // ===== Close Dropdowns on Outside Click =====
+      document.addEventListener("click", () => {
+        // Desktop
+        dropdowns.forEach((dropdown) => {
+          dropdown.querySelector(".dropdown-content")?.classList.remove("show");
+          dropdown
+            .querySelector(".fa-chevron-down")
+            ?.classList.remove("rotate");
+        });
 
+        // Mobile
+        dropdownsMobile.forEach((dropdown) => {
+          dropdown
+            .querySelector(".dropdown-content-mobile")
+            ?.classList.remove("show");
+          dropdown
+            .querySelector(".fa-chevron-down")
+            ?.classList.remove("rotate");
+        });
+      });
+
+      // ===== Mobile Menu Toggle =====
       const menuToggle = document.getElementById("menuToggle");
       const mobileMenu = document.getElementById("mobileMenu");
       const closeMenu = document.getElementById("closeMenu");
@@ -239,9 +261,6 @@ document.addEventListener("click", () => {
         mobileMenu.classList.remove("open");
         menuToggle.style.visibility = "visible";
       });
-
-
-      
     </script>
   </body>
 </html>
